@@ -1,0 +1,127 @@
+/* ========================================
+   Complaint Box - Custom Stylesheet
+   Design And Developed By Abhishek
+   ======================================== */
+
+/* ===== General ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== Feature Cards (Home Page) ===== */
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 1rem;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Auth Tab Styles ===== */
+.auth-tab {
+    color: #6c757d;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    color: #1a3a5c;
+    background-color: #f8f9fa;
+}
+
+.auth-tab.active {
+    color: #1a3a5c;
+    border-bottom-color: #2d6a9f;
+    background-color: #fff;
+    font-weight: 700;
+}
+
+/* ===== Form Controls ===== */
+.form-control:focus,
+.form-select:focus {
+    border-color: #2d6a9f;
+    box-shadow: 0 0 0 0.2rem rgba(45, 106, 159, 0.25);
+}
+
+/* ===== User Sidebar Styles ===== */
+.sidebar-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link.active {
+    color: #ffffff;
+    background-color: #2d6a9f;
+    font-weight: 600;
+}
+
+/* ===== Admin Sidebar Styles ===== */
+.admin-sidebar-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.admin-sidebar-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar-link.active {
+    color: #ffffff;
+    background-color: #c0392b;
+    font-weight: 600;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Card Hover ===== */
+.card {
+    transition: box-shadow 0.3s ease;
+}
+
+/* ===== Navbar Brand ===== */
+.navbar-brand {
+    font-size: 1.6rem;
+}
+
+/* ===== Table Styles ===== */
+.table th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Alert Styles ===== */
+.alert {
+    border: none;
+    border-radius: 0.75rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 400px !important;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+}
