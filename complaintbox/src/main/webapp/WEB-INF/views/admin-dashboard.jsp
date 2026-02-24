@@ -277,27 +277,7 @@
                                                     
                                                     
                                                     
-                                                    <tr>
 
-<td class="px-4 fw-semibold">${loop.index + 1}</td>
-
-<td class="fw-semibold">${complaint.user.name}</td>
-
-<td>
-    <span class="badge rounded-pill"
-          style="background-color:#e8f0fe;color:#2d6a9f;">
-        ${complaint.category}
-    </span>
-</td>
-
-<td class="fw-semibold">${complaint.subject}</td>
-
-<td class="text-muted" style="max-width:200px;">
-    <span class="d-inline-block text-truncate"
-          style="max-width:180px;">
-        ${complaint.description}
-    </span>
-</td>
 
 <td>
 <c:choose>

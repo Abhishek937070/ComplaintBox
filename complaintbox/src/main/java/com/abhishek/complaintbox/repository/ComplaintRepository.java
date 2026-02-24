@@ -15,6 +15,13 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
     List<Complaint> findByUserOrderByCreatedAtDesc(User user);
     long countByUser(User user);
     long countByUserAndStatus(User user, String status);
+    
+    
+    
+    @Query("SELECT DISTINCT c FROM Complaint c LEFT JOIN FETCH c.user ORDER BY c.createdAt DESC")
+    List<Complaint> findAllComplaintsDistinct();
+    
+    
 
     // Admin: all complaints
     List<Complaint> findAllByOrderByCreatedAtDesc();

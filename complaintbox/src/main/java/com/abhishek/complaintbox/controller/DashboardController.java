@@ -58,7 +58,7 @@ public class DashboardController {
     }
 
     // ================= FILE COMPLAINT WITH IMAGE =================
-    @PostMapping("/addComplaint")
+    @PostMapping("/dashboard/file-complaint")
     public String addComplaint(
             @RequestParam String category,
             @RequestParam String subject,
@@ -69,58 +69,52 @@ public class DashboardController {
 
         User user = getLoggedInUser(session);
 
-        if (user == null) {
+        if (user == null)
             return "redirect:/auth?tab=login";
-        }
 
         String fileName = null;
 
         try {
 
-            // ========= FILE UPLOAD =========
+            // ===== FILE UPLOAD =====
             if (!file.isEmpty()) {
 
                 fileName = System.currentTimeMillis()
                         + "_" + file.getOriginalFilename();
 
-                String uploadDir = "uploads/complaints/";
+                String uploadDir =
+                        System.getProperty("user.dir")
+                        + "/uploads/complaints/";
 
                 Path uploadPath = Paths.get(uploadDir);
 
-                if (!Files.exists(uploadPath)) {
+                if (!Files.exists(uploadPath))
                     Files.createDirectories(uploadPath);
-                }
 
-                Path filePath = uploadPath.resolve(fileName);
-                Files.write(filePath, file.getBytes());
+                Files.write(
+                        uploadPath.resolve(fileName),
+                        file.getBytes());
             }
 
-            // ========= SAVE COMPLAINT =========
-            Complaint complaint =
-                    userService.fileComplaint(
-                            category,
-                            subject,
-                            description,
-                            user.getId());
+            // ✅ CREATE OBJECT ONLY ONCE
+            Complaint complaint = new Complaint();
+            complaint.setCategory(category);
+            complaint.setSubject(subject);
+            complaint.setDescription(description);
+            complaint.setAttachment(fileName);
+            complaint.setUser(user);
 
-            // ========= SAVE ATTACHMENT =========
-            if (complaint != null && fileName != null) {
-                complaint.setAttachment(fileName);
-                userService.updateComplaint(complaint);
-            }
+            // ✅ SAVE ONLY ONE TIME
+            userService.saveComplaint(complaint);
 
             redirectAttributes.addFlashAttribute(
                     "successMsg",
                     "Complaint Added Successfully!");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute(
-                    "errorMsg",
-                    "File upload failed!");
         }
 
-        // ✅ CORRECT REDIRECT
         return "redirect:/dashboard?section=complaints";
     }
 
