@@ -226,6 +226,7 @@
                                                 <th class="py-3">Description</th>
                                                 <th class="py-3">Status</th>
                                                 <th class="py-3">Date</th>
+                                                <th class="py-3 text-center">Media</th>
                                                 <th class="py-3 text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -265,13 +266,129 @@
                                                         <fmt:parseDate value="${complaint.createdAt}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDate"/>
                                                         <fmt:formatDate value="${parsedDate}" pattern="dd MMM yyyy"/>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <a href="/admin/resolve/${complaint.id}"
-                                                           class="btn btn-sm fw-semibold text-white"
-                                                           style="background-color: #c0392b;">
-                                                            <i class="bi bi-reply-fill me-1"></i>Resolve
-                                                        </a>
-                                                    </td>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    <tr>
+
+<td class="px-4 fw-semibold">${loop.index + 1}</td>
+
+<td class="fw-semibold">${complaint.user.name}</td>
+
+<td>
+    <span class="badge rounded-pill"
+          style="background-color:#e8f0fe;color:#2d6a9f;">
+        ${complaint.category}
+    </span>
+</td>
+
+<td class="fw-semibold">${complaint.subject}</td>
+
+<td class="text-muted" style="max-width:200px;">
+    <span class="d-inline-block text-truncate"
+          style="max-width:180px;">
+        ${complaint.description}
+    </span>
+</td>
+
+<td>
+<c:choose>
+    <c:when test="${complaint.status=='Pending'}">
+        <span class="badge bg-warning text-dark">Pending</span>
+    </c:when>
+    <c:when test="${complaint.status=='In Progress'}">
+        <span class="badge bg-info text-dark">In Progress</span>
+    </c:when>
+    <c:when test="${complaint.status=='Resolved'}">
+        <span class="badge bg-success">Resolved</span>
+    </c:when>
+</c:choose>
+</td>
+
+<td class="text-muted small">
+    <fmt:parseDate value="${complaint.createdAt}"
+                   pattern="yyyy-MM-dd'T'HH:mm"
+                   var="parsedDate"/>
+    <fmt:formatDate value="${parsedDate}"
+                    pattern="dd MMM yyyy"/>
+</td>
+
+<!-- ✅ MEDIA COLUMN -->
+<td class="text-center">
+
+<c:choose>
+
+<c:when test="${not empty complaint.attachment}">
+
+<!-- IMAGE PREVIEW -->
+<c:if test="${complaint.attachment.endsWith('.jpg')
+          || complaint.attachment.endsWith('.png')
+          || complaint.attachment.endsWith('.jpeg')
+          || complaint.attachment.endsWith('.gif')}">
+
+<img src="/uploads/${complaint.attachment}"
+     width="70"
+     height="60"
+     style="object-fit:cover;
+            border-radius:8px;
+            cursor:pointer;"
+     onclick="window.open(this.src)">
+</c:if>
+
+<!-- VIDEO PREVIEW -->
+<c:if test="${complaint.attachment.endsWith('.mp4')
+          || complaint.attachment.endsWith('.webm')
+          || complaint.attachment.endsWith('.mov')}">
+
+<video width="90" height="60" controls>
+    <source src="/uploads/${complaint.attachment}">
+</video>
+
+</c:if>
+
+</c:when>
+
+<c:otherwise>
+    <span class="text-muted">No Media</span>
+</c:otherwise>
+
+</c:choose>
+
+</td>
+
+<!-- ✅ ACTION COLUMN -->
+<td class="text-center">
+    <a href="/admin/resolve/${complaint.id}"
+       class="btn btn-sm fw-semibold text-white"
+       style="background-color:#c0392b;">
+        <i class="bi bi-reply-fill me-1"></i>Resolve
+    </a>
+</td>
+
+</tr>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -319,6 +436,52 @@
                                     <label class="form-label text-muted small fw-semibold">Description</label>
                                     <p class="bg-light rounded-3 p-3">${complaint.description}</p>
                                 </div>
+                                
+                                
+                                <div class="mb-3">
+<label class="form-label text-muted small fw-semibold">
+Attached Media
+</label>
+
+<c:choose>
+
+<c:when test="${not empty complaint.attachment}">
+
+<!-- IMAGE -->
+<c:if test="${complaint.attachment.endsWith('.jpg')
+          || complaint.attachment.endsWith('.png')
+          || complaint.attachment.endsWith('.jpeg')
+          || complaint.attachment.endsWith('.gif')}">
+
+<img src="/uploads/${complaint.attachment}"
+     class="img-fluid rounded"
+     style="max-height:300px;">
+</c:if>
+
+<!-- VIDEO -->
+<c:if test="${complaint.attachment.endsWith('.mp4')
+          || complaint.attachment.endsWith('.webm')
+          || complaint.attachment.endsWith('.mov')}">
+
+<video width="100%" controls>
+<source src="/uploads/${complaint.attachment}">
+</video>
+
+</c:if>
+
+</c:when>
+
+<c:otherwise>
+<p class="text-muted">No media attached</p>
+</c:otherwise>
+
+</c:choose>
+
+</div>
+                                
+                                
+                                
+                                
                                 <div class="mb-3">
                                     <label class="form-label text-muted small fw-semibold">Current Status</label>
                                     <p>

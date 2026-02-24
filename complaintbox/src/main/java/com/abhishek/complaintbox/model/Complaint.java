@@ -21,7 +21,7 @@ public class Complaint {
     private String description;
 
     @Column(nullable = false)
-    private String status;
+    private String status; 
 
     @Column(name = "admin_reply", columnDefinition = "TEXT")
     private String adminReply;
@@ -31,6 +31,9 @@ public class Complaint {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+    
+    @Column(name = "attachment")
+    private String attachment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -77,4 +80,12 @@ public class Complaint {
 
     public LocalDateTime getResolvedAt() { return resolvedAt; }
     public void setResolvedAt(LocalDateTime resolvedAt) { this.resolvedAt = resolvedAt; }
+    
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
 }

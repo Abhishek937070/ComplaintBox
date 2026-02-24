@@ -261,7 +261,11 @@
                 <c:if test="${section == 'new-complaint'}">
                     <h3 class="fw-bold mb-4">File New Complaint</h3>
                     <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5" style="max-width: 700px;">
-                        <form action="/dashboard/file-complaint" method="post">
+                       
+                        <form action="${pageContext.request.contextPath}/dashboard/file-complaint"
+      method="post"
+      enctype="multipart/form-data">
+     							 
                             <div class="mb-3">
                                 <label for="category" class="form-label fw-semibold">
                                     <i class="bi bi-tag me-1"></i>Category
@@ -291,6 +295,19 @@
                                 </label>
                                 <textarea class="form-control" id="description" name="description"
                                           rows="6" placeholder="Describe your complaint in detail..." required></textarea>
+                               
+                               <div class="mb-4">
+    								<label class="form-label fw-semibold">
+      								  <i class="bi bi-paperclip me-1"></i>
+      								  Attach Image / Video
+   									 </label>
+
+   									 <input type="file"
+      									     class="form-control"
+       									    name="file"
+         									  accept="image/*,video/*">
+								</div>	
+                               
                             </div>
                             <button type="submit" class="btn btn-lg fw-semibold text-white px-5"
                                     style="background-color: #1a3a5c;">
@@ -308,7 +325,7 @@
                         <div class="col-lg-6">
                             <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
                                 <h5 class="fw-bold mb-3"><i class="bi bi-person-circle me-2"></i>Update Profile</h5>
-                                <form action="/dashboard/update-profile" method="post">
+                               <form action="${pageContext.request.contextPath}/dashboard/update-profile" method="post">
                                     <div class="mb-3">
                                         <label for="profileName" class="form-label fw-semibold">Full Name</label>
                                         <input type="text" class="form-control form-control-lg" id="profileName"
@@ -336,7 +353,7 @@
                         <div class="col-lg-6">
                             <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
                                 <h5 class="fw-bold mb-3"><i class="bi bi-shield-lock me-2"></i>Change Password</h5>
-                                <form action="/dashboard/change-password" method="post">
+                               <form action="${pageContext.request.contextPath}/dashboard/change-password" method="post">
                                     <div class="mb-3">
                                         <label for="currentPassword" class="form-label fw-semibold">Current Password</label>
                                         <input type="password" class="form-control form-control-lg" id="currentPassword"
